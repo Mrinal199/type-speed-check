@@ -26,7 +26,7 @@ router.post("/api/auth/login", async (req, res) => {
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
-    console.log("Generated Token:", token);  // ✅ DEBUGGING  
+    console.log("Generated Token:", token);  
 
     res.json({ token });
 });

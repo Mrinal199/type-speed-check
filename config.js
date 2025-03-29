@@ -11,15 +11,15 @@ const connectDB = async () => {
             throw new Error("MONGO_URI is missing! Check your environment variables.");
         }
 
-        console.log("🔄 Connecting to MongoDB...");
+        console.log("Connecting to MongoDB...");
         await mongoose.connect(mongoURI, {
-            serverSelectionTimeoutMS: 10000, // Timeout after 10s
-            socketTimeoutMS: 45000, // Socket timeout
+            serverSelectionTimeoutMS: 10000, 
+            socketTimeoutMS: 45000, 
         });
 
-        console.log("✅ MongoDB Connected...");
+        console.log("MongoDB Connected...");
     } catch (err) {
-        console.error("❌ MongoDB Connection Error:", err.message);
+        console.error("MongoDB Connection Error:", err.message);
         process.exit(1);
     }
 };
