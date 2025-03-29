@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const authMiddleware = (req, res, next) => {
     const token = req.header("Authorization");
 
-    console.log("Auth Header Received:", token);  // ✅ LOGGING
+    console.log("Auth Header Received:", token);  //
 
     if (!token) {
         return res.status(401).json({ message: "No token, authorization denied" });
@@ -11,10 +11,10 @@ const authMiddleware = (req, res, next) => {
 
     try {
         const cleanToken = token.startsWith("Bearer ") ? token.split(" ")[1] : token;
-        console.log("Extracted Token:", cleanToken);  // ✅ LOGGING
+        console.log("Extracted Token:", cleanToken);
 
         const decoded = jwt.verify(cleanToken, process.env.JWT_SECRET);
-        console.log("Decoded Token:", decoded);  // ✅ LOGGING
+        console.log("Decoded Token:", decoded);  
 
         req.user = decoded;  
         next();

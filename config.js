@@ -6,10 +6,22 @@ dotenv.config();
 const connectDB = async () => {
     try {
         const mongoURI = process.env.MONGO_URI;
-        await mongoose.connect(mongoURI);
-        console.log("✅ MongoDB Connected...");
+
+        if (!mongoURI) {
+            throw new Error("MONGO_URI is missing! Check your environment variables.");
+        }
+
+        console.log("Connecting to MongoDB...");
+        await mongoose.connect(mongoURI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            serverSelectionTimeoutMS: 10000, // Wait up to 10s before failing
+            socketTimeoutMS: 45000, // Wait up to 45s for socket response
+        });
+
+        console.log("MongoDB Connected...");
     } catch (err) {
-        console.error(err.message);
+        console.error("MongoDB Connection Error:", err.message);
         process.exit(1);
     }
 };
